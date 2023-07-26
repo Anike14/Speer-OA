@@ -24,14 +24,27 @@ public class User implements UserDetails {
 	public Long getId() {
 		return this.id;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Override
 	public String getUsername() {
 		return this.username;
 	}
 	
+	public String setUsername(String username) {
+		return this.username = username;
+	}
+	
 	@Override
 	public String getPassword() {
 		return this.password;
+	}
+	
+	public String setPassword(String password) {
+		return this.password = password;
 	}
 
 	// TODO
@@ -59,5 +72,4 @@ public class User implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-    
 }

@@ -4,6 +4,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JWTService {
+	
+	@Value("${JWT.key}")
+	private String jwtKey;
 
 	public String extractUserName(String jwToken) {
 		return extractClaim(jwToken, Claims::getSubject);
@@ -37,19 +41,18 @@ public class JWTService {
         return (userName.equals(userDetails.getUsername())) && extractExpiration(jwToken).after(new Date());
 	}
 	
-	public static String generateAccessToken(String username) {
+	public String generateAccessToken(String username) {
 	    String res = Jwts.builder()
                 .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+                .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 24 hours
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
 	    return res;
 	}
 	
 	@Bean
-	public static Key getSigningKey() {
-		String key = "413F4428472B4B6250655368566D5970337336763979244226452948404D6351";
-        byte[] keyBytes = Decoders.BASE64.decode(key);
+	public Key getSigningKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(jwtKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 }

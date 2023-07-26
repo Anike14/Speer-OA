@@ -18,8 +18,6 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-
-
 	public UserDetailsService userDetailsService() {
 	    return new UserDetailsService() {
 	        @Override

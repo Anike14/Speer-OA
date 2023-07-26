@@ -35,9 +35,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
     	// extract the authorization value from request header
-        final String authHeader = request.getHeader("Authorization");
-        final String jwToken;
-        final String userName;
+        String authHeader = request.getHeader("Authorization");
+        String jwToken;
+        String userName;
         if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
         	// this will trigger the next filter in the chain
             filterChain.doFilter(request, response);
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.setContext(context);
             }
         }
-     // this will trigger the next filter in the chain
+        // this will trigger the next filter in the chain
         filterChain.doFilter(request, response);
     }
 }

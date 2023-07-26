@@ -5,7 +5,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,14 +16,11 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.speer.OA.models.Note;
 import com.speer.OA.models.User;
 import com.speer.OA.repositories.NoteRepository;
 import com.speer.OA.repositories.UserRepository;
-import com.speer.OA.security.JWTService;
 
 @ExtendWith(MockitoExtension.class)
 public class NoteControllerTest {
